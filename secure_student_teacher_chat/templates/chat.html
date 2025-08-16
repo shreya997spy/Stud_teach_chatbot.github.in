@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ username }} ({{ role }})</h2>
+
+        <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+
+        <div class="chat-box">
+            {% for msg in messages %}
+                <div class="message {{ 'student' if msg.role == 'student' else 'teacher' }}">
+                    <p><strong>{{ msg.name }}</strong> ({{ msg.department }})</p>
+                    <p><em>{{ msg.subject }} | {{ msg.query_type }} | {{ msg.time }}</em></p>
+                    <p>{{ msg.message }}</p>
+
+                    {% if msg.reply %}
+                    <p style="color: green;"><strong>Reply:</strong> <span class="reply-glow">{{ msg.reply }} (by {{ msg.replied_by }})</span></p>
+                    {% elif role == 'teacher' %}
+                        <form method="POST" action="{{ url_for('reply_message', msg_id=msg.id) }}">
+                            <input type="text" name="reply" placeholder="Type your reply..." required>
+                            <button type="submit">Reply</button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if role == 'student' %}
+        <form method="POST" action="{{ url_for('send_message') }}">
+            <input type="text" name="subject" placeholder="Subject" required>
+           <label for="department">Department:</label>
+<select name="department" required>
+    <option value="">-- Select Department --</option>
+    <option value="Computer">Computer</option>
+    <option value="Mechanical">Mechanical</option>
+    <option value="Civil">Civil</option>
+</select>
+
+<label for="query_type">Query Type:</label>
+<select name="query_type" required>
+    <option value="">-- Select Query Type --</option>
+    <option value="General">General</option>
+    <option value="Complaint">Complaint</option>
+    <option value="Doubt">Doubt</option>
+    <option value="Feedback">Feedback</option>
+</select>
+
+            <textarea name="message" placeholder="Type your message here..." required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

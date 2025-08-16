@@ -1,0 +1,201 @@
+
+/* style.css - Enhanced UI for Chat Application */
+
+body {
+     background-image: url('../static/pillai1.jpg');
+    background-size: contain; /* or 'cover' depending on your layout */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #000; /* fallback color */
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9eff5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Chat specific styles */
+.chat-box {
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+    margin-bottom: 15px;
+}
+
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+.message.student {
+    background-color: #d1ecf1;
+    text-align: right;
+    margin-left: auto;
+}
+
+.message.teacher {
+    background-color: #d4edda;
+    text-align: left;
+    margin-right: auto;
+}
+
+/* Footer section */
+footer {
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: 30px;
+    color: #888;
+}
+/* Smooth fade-in animation for messages */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message {
+    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.2s ease-in-out, background-color 0.2s;
+}
+
+/* Hover bounce effect for messages */
+.message:hover {
+    transform: scale(1.02);
+}
+
+/* Button hover pulse animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+button:hover {
+    animation: pulse 0.3s ease-in-out;
+}
+
+/* Add smooth transition to form inputs */
+input, textarea {
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Smooth scroll for chat box */
+.chat-box {
+    scroll-behavior: smooth;
+}
+/* Slide-in animations based on role */
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.message.student {
+    animation: slideInRight 0.4s ease forwards;
+    background-color: #d1ecf1;
+    text-align: right;
+    margin-left: auto;
+}
+
+.message.teacher {
+    animation: slideInLeft 0.4s ease forwards;
+    background-color: #d4edda;
+    text-align: left;
+    margin-right: auto;
+}
+
+/* Animate chat-box entrance */
+.chat-box {
+    animation: fadeIn 0.8s ease;
+    scroll-behavior: smooth;
+}
+
+/* Animate form reveal */
+form {
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.3s forwards;
+}
+
+/* Glow animation for new reply */
+@keyframes glow {
+    0% { background-color: #e2fbe2; }
+    50% { background-color: #c2f0c2; }
+    100% { background-color: #e2fbe2; }
+}
+
+.message p strong + .reply-glow {
+    animation: glow 1s ease-in-out 1;
+}
+
+/* Hover effect on reply input */
+form input[type="text"]:hover,
+form textarea:hover {
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+    border-color: #3498db;
+}
+
+
